@@ -29,9 +29,10 @@
     update_cache: yes
 
 - name: Download and install pip
-  command:
-    - curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
-    - python2 get-pip.py
+  command: curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
+
+- name: Download and install pip part2
+  command: python2 get-pip.py
 
 - name: Install additional packages for motioneye
   apt:

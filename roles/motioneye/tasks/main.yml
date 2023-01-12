@@ -15,17 +15,17 @@
     state: present
     vars:
       packages:
-          - python-dev
-          - curl
-          - libssl-dev
-          - libcurl4-openssl-dev
-          - libjpeg-dev
-          - libx264-142
-          - libavcodec56
-          - libavformat56
-          - libmysqlclient18
-          - libswscale3
-          - libpq5
+        - python-dev
+        - curl
+        - libssl-dev
+        - libcurl4-openssl-dev
+        - libjpeg-dev
+        - libx264-142
+        - libavcodec56
+        - libavformat56
+        - libmysqlclient18
+        - libswscale3
+        - libpq5
 
 - name: Download ffmpeg package
   command:  wget https://github.com/Motion-Project/motion/releases/download/release-4.0.1/pi_jessie_motion_4.0.1-1_armhf.deb
@@ -35,17 +35,17 @@
 
 - name: Install MotionEye
   pip:
-        name: motioneye
-        state: present
-        executable: pip2
+    name: motioneye
+    state: present
+    executable: pip2
 
 - name: Create MotionEye configuration directory
   file:
-        path: /etc/motioneye
-        state: directory
-        owner: root
-        group: root
-        mode: 0755
+    path: /etc/motioneye
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
 
 - name: Copy MotionEye configuration file
   command: cp /usr/local/share/motioneye/extra/motioneye.conf.sample /etc/motioneye/motioneye.conf

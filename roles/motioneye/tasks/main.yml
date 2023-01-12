@@ -13,19 +13,20 @@
   apt:
     name: "{{ packages }}"
     state: present
-    vars:
-      packages:
-        - python-dev
-        - curl
-        - libssl-dev
-        - libcurl4-openssl-dev
-        - libjpeg-dev
-        - libx264-142
-        - libavcodec56
-        - libavformat56
-        - libmysqlclient18
-        - libswscale3
-        - libpq5
+  vars:
+    packages:
+      - python-dev
+      - curl
+      - libssl-dev
+      - libcurl4-openssl-dev
+      - libjpeg-dev
+      - libx264-142
+      - libavcodec56
+      - libavformat56
+      - libmysqlclient18
+      - libswscale3
+      - libpq5
+
 
 - name: Download ffmpeg package
   command:  wget https://github.com/Motion-Project/motion/releases/download/release-4.0.1/pi_jessie_motion_4.0.1-1_armhf.deb
@@ -37,7 +38,7 @@
   pip:
     name: motioneye
     state: present
-    executable: pip2
+    executable: pip3
 
 - name: Create MotionEye configuration directory
   file:

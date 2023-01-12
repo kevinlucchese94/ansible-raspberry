@@ -1,4 +1,4 @@
-- - name: Main Raspberry
+- name: Main Raspberry
   hosts:
     - localhost
   become: true

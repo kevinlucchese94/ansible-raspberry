@@ -4,21 +4,17 @@
     state: present
     update_cache: yes
 
-- name: Download 45drives repository setup script
-  command: curl -sSL https://repo.45drives.com/setup -o setup-repo.sh
+- name: Download cockpit-navigator package
+  command: wget https://github.com/45Drives/cockpit-navigator/releases/download/v0.5.10/cockpit-navigator_0.5.10-1focal_all.deb
 
-- name: Run 45drives repository setup script
-  command: bash setup-repo.sh
+- name: Install cockpit-navigator package
+  command: dpkg -i cockpit-navigator_0.5.10-1focal_all.deb
 
 - name: Download cockpit-samba-manager package
   command: wget https://github.com/45Drives/cockpit-samba-manager/releases/download/v1.0.6/cockpit-samba-manager_1.0.6-1focal_all.deb
 
-- name: Install cockpit-samba-manager package
-  apt:
-    name: cockpit-samba-manager
-    state: present
-    update_cache: no
-    deb: cockpit-samba-manager_1.0.6-1focal_all.deb
+- name: Install cockpit-navigator package
+  command: dpkg -i cockpit-samba-manager_1.0.6-1focal_all.deb
 
 
 - name: Enable and start cockpit service

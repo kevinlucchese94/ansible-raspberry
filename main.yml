@@ -3,5 +3,5 @@
     - localhost
   become: true
   roles:
-    - creadir
+    - motioneye
     - creacontainer

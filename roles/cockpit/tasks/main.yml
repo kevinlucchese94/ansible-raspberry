@@ -10,13 +10,6 @@
 - name: Install cockpit-navigator package
   command: dpkg -i cockpit-navigator_0.5.10-1focal_all.deb
 
-- name: Download cockpit-samba-manager package
-  command: wget https://github.com/45Drives/cockpit-samba-manager/releases/download/v1.0.6/cockpit-samba-manager_1.0.6-1focal_all.deb
-
-- name: Install cockpit-navigator package
-  command: dpkg -i cockpit-samba-manager_1.0.6-1focal_all.deb
-
-
 - name: Enable and start cockpit service
   service:
     name: cockpit.socket

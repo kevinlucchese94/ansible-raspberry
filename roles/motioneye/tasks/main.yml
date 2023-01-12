@@ -10,7 +10,7 @@
       - libffi-dev
       - python-dev
       - python-setuptools
-      - python-wheel
+      - python3-wheel
       - libjpeg-dev
       - libcairo2-dev
       - ffmpeg

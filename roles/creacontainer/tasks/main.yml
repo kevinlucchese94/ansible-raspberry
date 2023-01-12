@@ -12,8 +12,9 @@
 
 - name: Create pihole container
   command: docker-compose up -d pihole
-  dir: /home/pi/pihole
   tags: pihole
+  args:
+    chdir: /home/pi/pihole/
 
 - name: Create motioneye container
   command: docker-compose up -d motioneye

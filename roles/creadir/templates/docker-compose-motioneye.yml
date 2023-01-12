@@ -2,7 +2,7 @@ version: '3'
 services:
   motioneye:
     container_name: motioneye
-    image: ccrisan/motioneye
+    image: hurlenko/motioneye
     ports:
       - "8765:8765"
     volumes:

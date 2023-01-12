@@ -1,36 +1,25 @@
----
-- name: Install dependencies
-  apt:
-    name: "{{ packages }}"
+- name: Add MotionEye repository
+  apt_repository:
+    repo: deb http://deb.motion-project.com/motion-project bullseye main
     state: present
-  vars:
-    packages:
-      - python3-pip
-      - libssl-dev
-      - libffi-dev
-      - python-dev
-      - python-setuptools
-      - python3-wheel
-      - libjpeg-dev
-      - libcairo2-dev
-      - ffmpeg
+
+- name: Add MotionEye repository key
+  apt_key:
+    url: http://deb.motion-project.com/motion-project.key
+    state: present
+
+- name: Update package list
+  apt:
+    update_cache: yes
 
 - name: Install MotionEye
-  pip:
+  apt:
     name: motioneye
     state: present
 
 - name: Create MotionEye configuration directory
   file:
     path: /etc/motioneye
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-
-- name: Create MotionEye media directory
-  file:
-    path: /var/lib/motioneye
     state: directory
     owner: root
     group: root
@@ -43,3 +32,9 @@
     owner: root
     group: root
     mode: 0644
+
+- name: Enable MotionEye service
+  systemd:
+    name: motioneye
+    state: started
+    enabled: yes

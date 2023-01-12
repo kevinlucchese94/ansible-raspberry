@@ -1,0 +1,10 @@
+version: '3'
+services:
+  tinyfilemanager:
+    container_name: tinyfilemanager
+    image: tribut/tinyfilemanager
+    ports:
+      - "8888:80"
+    volumes:
+      - '/path/to/files:/var/www/html/files'
+      - '/path/to/config:/var/www/html/config'

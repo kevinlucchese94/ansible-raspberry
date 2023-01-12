@@ -1,0 +1,28 @@
+---
+- name: Install and configure cockpit, docker-compose and containers
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Install cockpit
+    package:
+      name: cockpit
+      state: present
+    tags: cockpit
+
+  - name: Install docker-compose
+    package:
+      name: docker-compose
+      state: present
+    tags: docker-compose
+
+  - name: Create pihole container
+    command: docker-compose up -d pihole
+    tags: pihole
+
+  - name: Create motioneye container
+    command: docker-compose up -d motioneye
+    tags: motioneye
+
+  - name: Create tinyfilemanager container
+    command: docker-compose up -d tinyfilemanager
+    tags: tinyfilemanager

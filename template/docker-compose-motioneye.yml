@@ -1,0 +1,10 @@
+version: '3'
+services:
+  motioneye:
+    container_name: motioneye
+    image: ccrisan/motioneye
+    ports:
+      - "8765:8765"
+    volumes:
+      - '/etc/motioneye:/etc/motioneye'
+      - '/var/lib/motioneye:/var/lib/motioneye'

@@ -38,7 +38,7 @@
 
 - name: Copy MotionEye configuration file
   template:
-    src: motioneye.conf.j2
+    src: templates/motioneye.conf.j2
     dest: /etc/motioneye/motioneye.conf
     owner: root
     group: root

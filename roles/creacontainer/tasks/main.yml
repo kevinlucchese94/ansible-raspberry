@@ -10,16 +10,20 @@
     state: present
   tags: docker-compose
 
-- name: Create pihole container
-  command: docker-compose up -d pihole
-  tags: pihole
-  args:
-    chdir: /home/pi/pihole/
+#- name: Create pihole container
+#  command: docker-compose up -d pihole
+#  tags: pihole
+#  args:
+#    chdir: /home/pi/pihole/
 
 - name: Create motioneye container
   command: docker-compose up -d motioneye
   tags: motioneye
+  args:
+    chdir: /home/pi/motioneye/
 
 - name: Create tinyfilemanager container
   command: docker-compose up -d tinyfilemanager
   tags: tinyfilemanager
+  args:
+    chdir: /home/pi/tinyfilemanager/

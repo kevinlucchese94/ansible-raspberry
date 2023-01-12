@@ -9,6 +9,7 @@ services:
     volumes:
       - /DATA_DIR:/data
       - /CONFIG_DIR:/config
+      - /home/pi:/home
     environment:
       - FB_BASEURL=/filebrowser
     restart: always

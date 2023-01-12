@@ -64,7 +64,10 @@
   command: cp /usr/local/share/motioneye/extra/motioneye.systemd-unit-local /etc/systemd/system/motioneye.service
 
 - name: Reload systemd daemon and enable motioneye service
-  command: systemctl daemon-reload && systemctl enable motioneye
+  command: systemctl daemon-reload
+
+- name: Reload systemd daemon and enable motioneye service part2
+  command: systemctl enable motioneye
 
 - name: Start motioneye service
   service:

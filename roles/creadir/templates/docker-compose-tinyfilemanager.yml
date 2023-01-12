@@ -6,5 +6,5 @@ services:
     ports:
       - "8888:88"
     volumes:
-      - '/path/to/files:/var/www/html/files'
+      - '/var/www/:/var/www/html/files'
       - '/path/to/config:/var/www/html/config'

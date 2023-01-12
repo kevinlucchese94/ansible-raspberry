@@ -1,54 +1,100 @@
-- name: Install python3-pip
-  apt:
-    name: python3-pip
-    state: present
-
-- name: Download ffmpeg package
-  command: wget https://github.com/ccrisan/motioneye/wiki/precompiled/ffmpeg_3.1.1-1_armhf.deb
-
-- name: Install ffmpeg package
-  command: dpkg -i ffmpeg_3.1.1-1_armhf.deb
 
 - name: Install dependencies
   apt:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - python-dev
-      - curl
-      - libssl-dev
-      - libcurl4-openssl-dev
-      - libjpeg-dev
-      - libx264-142
-      - libavcodec56
-      - libavformat56
-      - libmysqlclient18
-      - libswscale3
-      - libpq5
+    - name:
+    - ffmpeg
+    - libmariadb3
+    - libpq5
+    - libmicrohttpd12
+  state: present
+  update_cache: yes
+  force_apt_get: yes
 
-
-- name: Download ffmpeg package
-  command:  wget https://github.com/Motion-Project/motion/releases/download/release-4.0.1/pi_jessie_motion_4.0.1-1_armhf.deb
-
-- name: Install ffmpeg package
-  command: dpkg -i pi_jessie_motion_4.0.1-1_armhf.deb
-
-- name: Install MotionEye
-  pip:
-    name: motioneye
-    state: present
-    executable: pip3
-
-- name: Create MotionEye configuration directory
-  file:
-    path: /etc/motioneye
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-
-- name: Copy MotionEye configuration file
-  command: cp /usr/local/share/motioneye/extra/motioneye.conf.sample /etc/motioneye/motioneye.conf
+- name: Download Motion package
+  command: wget https://github.com/Motion-Project/motion/releases/download/release-4.3.2/pi_buster_motion_4.3.2-1_armhf.deb
   args:
-    creates: /etc/motioneye/motioneye.conf
+    creates: pi_buster_motion_4.3.2-1_armhf.deb
+
+- name: Install Motion package
+  dpkg:
+- name: pi_buster_motion_4.3.2-1_armhf.deb
+  state: present
+
+- name: Stop and disable motion service
+  service:
+- name: motion
+  state: stopped
+  enabled: no
+
+- name: Install python2 and development packages
+  apt:
+  - name:
+  - python2
+  - python-dev
+  state: present
+  update_cache: yes
+  force_apt_get: yes
+
+- name: Install pip2
+  command: curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
+  args:
+    creates: get-pip.py
+
+- name: Install pip2
+  command: python2 get-pip.py
+
+- name: Install libraries
+  apt:
+  - name:
+  - libssl-dev
+  - libcurl4-openssl-dev
+  - libjpeg-dev
+  - zlib1g-dev
+  state: present
+  update_cache: yes
+  force_apt_get: yes
+
+- name: Install motioneye
+  pip:
+- name: motioneye
+  state: present
+
+- name: Create motioneye configuration directory
+  file:
+  path: /etc/motioneye
+  state: directory
+
+- name: Copy motioneye configuration
+  command: cp /usr/local/share/motioneye/extra/motioneye.conf.sample /etc/motioneye/motioneye.conf
+
+- name: Create motioneye data directory
+  file:
+  path: /var/lib/motioneye
+  state: directory
+
+- name: Copy motioneye service
+  command: cp /usr/local/share/motioneye/extra/motioneye.systemd-unit-local /etc/systemd/system/motioneye.service
+
+- name: Reload systemd
+  command: systemctl daemon-reload
+
+- name: Enable motioneye service
+  service:
+- name: motioneye
+  enabled: yes
+
+- name: Start motioneye service
+  service:
+- name: motioneye
+  state: started
+
+- name: Upgrade motioneye
+  pip:
+- name: motioneye
+  state: latest
+
+- name: Restart motioneye service
+  service:
+- name: motioneye
+  state: restarted
+

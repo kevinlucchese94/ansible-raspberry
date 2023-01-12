@@ -1,7 +1,7 @@
 ---
-- name: Install dependencies
+- - name: Install dependencies
   apt:
-    name: "{{ packages }}"
+    - name: "{{ packages }}"
     state: present
   vars:
     packages:
@@ -15,12 +15,12 @@
       - libcairo2-dev
       - ffmpeg
 
-- name: Install MotionEye
+- - name: Install MotionEye
   pip:
-    name: motioneye
+    - name: motioneye
     state: present
 
-- name: Create MotionEye configuration directory
+- - name: Create MotionEye configuration directory
   file:
     path: /etc/motioneye
     state: directory
@@ -28,7 +28,7 @@
     group: root
     mode: 0755
 
-- name: Create MotionEye media directory
+- - name: Create MotionEye media directory
   file:
     path: /var/lib/motioneye
     state: directory
@@ -36,7 +36,7 @@
     group: root
     mode: 0755
 
-- name: Copy MotionEye configuration file
+- - name: Copy MotionEye configuration file
   template:
     src: motioneye.conf.j2
     dest: /etc/motioneye/motioneye.conf

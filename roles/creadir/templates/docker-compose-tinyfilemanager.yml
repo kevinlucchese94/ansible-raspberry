@@ -1,7 +1,7 @@
 version: '3'
 services:
   tinyfilemanager:
-    container_name: tinyfilemanager
+    container_- name: tinyfilemanager
     image: tribut/tinyfilemanager
     ports:
       - "8888:88"

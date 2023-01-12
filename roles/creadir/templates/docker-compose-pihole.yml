@@ -1,7 +1,7 @@
 version: '3'
 services:
   pihole:
-    container_name: pihole
+    container_- name: pihole
     image: pihole/pihole
     ports:
       - "53:53/tcp"

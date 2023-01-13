@@ -27,8 +27,8 @@
   become: true
   mount:
     path: /home/pi/telecamere
-    src: /dev/sda
-    fstype: ext4
+    src: /telecamere
+    fstype: vfat
     state: mounted
     opts: 'uid=1000,gid=1000'
 

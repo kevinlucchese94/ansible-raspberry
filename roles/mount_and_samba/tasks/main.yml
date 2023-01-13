@@ -27,7 +27,7 @@
   become: true
   mount:
     path: /home/pi/telecamere
-    src: /dev/sda1
+    src: /dev/sda
     fstype: ext4
     state: mounted
     opts: 'uid=1000,gid=1000'

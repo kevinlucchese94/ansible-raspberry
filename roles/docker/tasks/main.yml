@@ -1,26 +1,37 @@
-- name: Install and upgrade packages
-  become: true
-  shell: |
-    sudo apt update && sudo apt upgrade -y
+- name: Install aptitude
+  apt:
+    name: aptitude
+    state: latest
+    update_cache: true
 
-- name: Remove old Docker packages
-  become: true
-  shell: |
-    sudo apt remove -y docker-ce*
-    sudo apt-get autoremove -y
+- name: Install required system packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
+    state: latest
+    update_cache: true
 
-- name: Install Docker
-  become: true
-  shell: |
-    curl -sSL https://get.docker.com | sh
+- name: Update apt and install docker-ce
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: true
+
+- name: Install Docker Module for Python
+  pip:
+    name: docker
 
 - name: Add user to Docker group
-  become: true
   shell: |
     sudo usermod -a -G docker $USER
 
 - name: Install pip and Docker Compose
-  become: true
   shell: |
     sudo apt install -y python3-pip python3
     sudo python3 -m pip install docker-compose

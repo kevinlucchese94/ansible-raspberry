@@ -13,7 +13,7 @@
   apt:
     name: ntfs-3g
     state: present
-    
+
 - name: Mount USB disk on /home/pi/foto_e_video
   become: true
   mount:
@@ -28,7 +28,7 @@
   mount:
     path: /home/pi/telecamere
     src: /dev/sda1
-    fstype: vfat
+    fstype: ext4
     state: mounted
     opts: 'uid=1000,gid=1000'
 

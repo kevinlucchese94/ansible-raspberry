@@ -48,7 +48,7 @@
 
 - name: Add pi user to smbpasswd
   become: true
-  shell: 'echo "pi" | smbpasswd -a -s pi!'
+  shell: 'echo "pi" | smbpasswd -a -s pi'
 
 - name: Create samba share for foto_e_video
   become: true

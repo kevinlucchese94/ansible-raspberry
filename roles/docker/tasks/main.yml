@@ -1,9 +1,20 @@
 - name: Install a list of packages
   apt:
-    name: "{{ pkgstoinstall }}"
-    vars:
-      kgstoinstall: [ libffi-dev, libssl-dev, python3, python3-pip ]
+    name: libffi-dev
     update_cache: yes
+- name: Install a list of packages
+  apt:
+    name: libssl-dev
+    update_cache: yes
+- name: Install a list of packages
+  apt:
+    name: python3
+    update_cache: yes
+- name: Install a list of packages
+  apt:
+    name: python3-pip
+    update_cache: yes
+
 - name: Remove python-configparser package
   apt:
     name: python-configparser
@@ -22,5 +33,3 @@
   shell: pip3 -v install docker-compose
   args:
     creates: /usr/local/bin/docker-compose
-
-

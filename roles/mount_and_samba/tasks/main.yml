@@ -1,0 +1,55 @@
+- name: Create foto e video directory
+  file:
+    path: /home/pi/foto_e_video
+    state: directory
+
+- name: Create telecamere directory
+  file:
+    path: /home/pi/telecamere
+    state: directory
+
+- name: Mount USB disk on /home/pi/foto_e_video
+  become: true
+  mount:
+    path: /home/pi/foto_e_video
+    src: /dev/sdb1
+    fstype: vfat
+    state: mounted
+    opts: 'uid=1000,gid=1000'
+
+- name: Mount USB disk on /home/pi/telecamere
+  become: true
+  mount:
+    path: /home/pi/telecamere
+    src: /dev/sds1
+    fstype: vfat
+    state: mounted
+    opts: 'uid=1000,gid=1000'
+
+- name: Install and configure Samba
+  become: true
+  apt:
+    name: samba
+    state: present
+
+- name: Create samba share for foto_e_video
+  become: true
+  lineinfile:
+    path: /etc/samba/smb.conf
+    line: '[foto_e_video]\npath = /home/pi/foto_e_video\nvalid users = pi\nread only = no\ncreate mask = 0660\ndirectory mask = 0771\nbrowseable = yes'
+    state: present
+    insertafter: '\[global\]'
+
+- name: Create samba share for telecamere
+  become: true
+  lineinfile:
+    path: /etc/samba/smb.conf
+    line: '[telecamere]\npath = /home/pi/telecamere\nvalid users = pi\nread only = no\ncreate mask = 0660\ndirectory mask = 0771\nbrowseable = yes'
+    state: present
+    insertafter: '\[global\]'
+
+- name: Restart Samba service
+  become: true
+  service:
+    name: smbd
+    state: restarted

@@ -6,4 +6,5 @@
     #- motioneye
     #- cockpit
     #- pihole
-    - filemanager
+    #- filemanager
+    - mount_and_samba

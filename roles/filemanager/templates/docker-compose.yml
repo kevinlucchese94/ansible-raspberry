@@ -7,9 +7,9 @@ services:
     ports:
       - 443:8080
     volumes:
-      - /DATA_DIR:/data
+      #- /DATA_DIR:/data
       - /CONFIG_DIR:/config
-      - /home/pi:/home
+      - /home/pi:/data
     environment:
       - FB_BASEURL=/filebrowser
     restart: always

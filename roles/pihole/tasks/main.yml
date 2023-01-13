@@ -1,12 +1,17 @@
-- name: Create pihole directory
-  file:
-    path: /home/pi/pihole
-    state: directory
-
-- name: Copy the docker-compose.yml file
-  copy:
-    src: templates/docker-compose.yml
-    dest: /home/pi/pihole/docker-compose.yml
-
-- name: Create pihole container
-  command: docker-compose -f /home/pi/pihole/docker-compose.yml up -d
+- name: Install and configure Pi-hole
+  shell: |
+    sudo apt-get update
+    sudo apt-get install -y \
+      apt-transport-https \
+      ca-certificates \
+      curl \
+      gnupg2 \
+      software-properties-common
+    curl -fsSL https://download.docker.com/linux/raspbian/gpg | sudo apt-key add -
+    echo "deb [arch=armhf] https://download.docker.com/linux/raspbian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
+    sudo apt-get update
+    sudo apt-get install -y docker-ce
+    sudo apt-get install -y python3-pip
+    sudo pip3 install docker-compose
+    cd /home/pi/pihole
+    sudo docker-compose up -d

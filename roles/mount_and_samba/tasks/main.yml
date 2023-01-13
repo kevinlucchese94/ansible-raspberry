@@ -30,7 +30,7 @@
     src: /dev/sda1	
     fstype: ext4
     state: mounted
-    opts: 'uid=1000,gid=1000'
+    opts: 'rw'
 
 - name: Install and configure Samba
   become: true

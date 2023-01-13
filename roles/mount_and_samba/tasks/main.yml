@@ -12,7 +12,7 @@
   become: true
   mount:
     path: /home/pi/foto_e_video
-    src: /dev/sdb1
+    src: /dev/sdb2
     fstype: vfat
     state: mounted
     opts: 'uid=1000,gid=1000'

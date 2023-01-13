@@ -38,36 +38,26 @@
     name: samba
     state: present
 
-- name: Add global section to smb.conf
+- name: Download and Install cockpit-samba-manager
+  become: true
+  shell: wget https://github.com/45Drives/cockpit-samba-manager/releases/download/v1.0.6/cockpit-samba-manager_1.0.6-1focal_all.deb
+
+- name: Download and Install cockpit-samba-manager
+  become: true
+  shell: apt install -y ./cockpit-samba-manager_1.0.6-1focal_all.deb
+
+- name: Include registry section in smb.conf
   become: true
   lineinfile:
     path: /etc/samba/smb.conf
-    line: '[global]\nworkgroup = WORKGROUP\nsecurity = user\nmap to guest = bad user\nguest account = pi'
-    state: present
-    insertafter: '# Global parameters'
-
-- name: Add pi user to smbpasswd
-  become: true
-  shell: 'echo "pi" | smbpasswd -a -s pi'
-
-- name: Create samba share for foto_e_video
-  become: true
-  lineinfile:
-    path: /etc/samba/smb.conf
-    line: '[foto_e_video]\npath = /home/pi/foto_e_video\nvalid users = pi\nread only = no\ncreate mask = 0660\ndirectory mask = 0771\nbrowseable = yes'
+    line: 'include = registry'
     state: present
     insertafter: '\[global\]'
 
-- name: Create samba share for telecamere
-  become: true
-  lineinfile:
-    path: /etc/samba/smb.conf
-    line: '[telecamere]\npath = /home/pi/telecamere\nvalid users = pi\nread only = no\ncreate mask = 0660\ndirectory mask = 0771\nbrowseable = yes'
-    state: present
-    insertafter: '\[global\]'
 
 - name: Restart Samba service
   become: true
   service:
     name: smbd
     state: restarted
+

@@ -1,18 +1,26 @@
-- name: Install Docker and Docker Compose
+- name: Install and upgrade packages
+  become: true
   shell: |
-    sudo apt-get update
-    sudo apt-get install -y \
-      apt-transport-https \
-      ca-certificates \
-      curl \
-      gnupg2 \
-      software-properties-common
-    curl -fsSL https://download.docker.com/linux/raspbian/gpg | sudo apt-key add -
-    sudo add-apt-repository \
-      "deb [arch=armhf] https://download.docker.com/linux/raspbian \
-      $(lsb_release -cs) \
-      stable"
-    sudo apt-get update
-    sudo apt-get install -y docker-ce
-    sudo apt-get install -y python3-pip
-    sudo pip3 install docker-compose
+    sudo apt update && sudo apt upgrade -y
+
+- name: Remove old Docker packages
+  become: true
+  shell: |
+    sudo apt remove -y docker-ce*
+    sudo apt-get autoremove -y
+
+- name: Install Docker
+  become: true
+  shell: |
+    curl -sSL https://get.docker.com | sh
+
+- name: Add user to Docker group
+  become: true
+  shell: |
+    sudo usermod -a -G docker $USER
+
+- name: Install pip and Docker Compose
+  become: true
+  shell: |
+    sudo apt install -y python3-pip python3
+    sudo python3 -m pip install docker-compose

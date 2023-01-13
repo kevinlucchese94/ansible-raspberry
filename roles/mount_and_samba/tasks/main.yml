@@ -8,14 +8,20 @@
     path: /home/pi/telecamere
     state: directory
 
+- name: Install ntfs-3g
+  become: true
+  apt:
+    name: ntfs-3g
+    state: present
+    
 - name: Mount USB disk on /home/pi/foto_e_video
   become: true
   mount:
     path: /home/pi/foto_e_video
     src: /dev/sdb2
-    fstype: vfat
+    fstype: ntfs
     state: mounted
-    opts: 'uid=1000,gid=1000'
+    opts: 'users,rw'
 
 - name: Mount USB disk on /home/pi/telecamere
   become: true

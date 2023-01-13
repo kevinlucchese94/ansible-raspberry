@@ -38,6 +38,18 @@
     name: samba
     state: present
 
+- name: Add global section to smb.conf
+  become: true
+  lineinfile:
+    path: /etc/samba/smb.conf
+    line: '[global]\nworkgroup = WORKGROUP\nsecurity = user\nmap to guest = bad user\nguest account = pi'
+    state: present
+    insertafter: '# Global parameters'
+
+- name: Add pi user to smbpasswd
+  become: true
+  shell: 'echo "pi" | smbpasswd -a -s #Erminio67!'
+
 - name: Create samba share for foto_e_video
   become: true
   lineinfile:

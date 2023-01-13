@@ -54,10 +54,15 @@
     state: present
     insertafter: '\[global\]'
 
-
 - name: Restart Samba service
   become: true
   service:
     name: smbd
+    state: restarted
+
+- name: Restart Cockpit service
+  become: true
+  service:
+    name: cockpit.socket
     state: restarted
 

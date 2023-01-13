@@ -3,8 +3,8 @@
     - localhost
   become: true
   roles:
-    #- motioneye
-    #- cockpit
-    #- pihole
-    #- filemanager
+    - motioneye
+    - cockpit
+    - pihole
+    - filemanager
     - mount_and_samba

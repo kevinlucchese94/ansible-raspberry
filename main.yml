@@ -5,6 +5,7 @@
   roles:
     #- motioneye
     #- cockpit
+    - docker
     - pihole
     - filemanager
     - mount_and_samba

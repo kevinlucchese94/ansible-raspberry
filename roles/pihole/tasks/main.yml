@@ -2,9 +2,11 @@
   file:
     path: /home/pi/pihole
     state: directory
+    
 - name: Copy the docker-compose.yml file
   copy:
     src: templates/docker-compose.yml
     dest: /home/pi/pihole/docker-compose.yml
+
 - name: Create pihole container
   command: docker-compose -f /home/pi/pihole/docker-compose.yml up -d

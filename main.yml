@@ -3,7 +3,7 @@
     - localhost
   become: true
   roles:
-    - motioneye
+    #- motioneye
     - cockpit
     - docker
     #- pihole

@@ -9,3 +9,4 @@
     #- pihole
     - filemanager
     - mount_and_samba
+    - cups_sanw

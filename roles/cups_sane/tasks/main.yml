@@ -1,0 +1,11 @@
+- name: Install cups
+  become: true
+  apt:
+    name: cups
+    state: present
+
+- name: Install sane
+  become: true
+  apt:
+    name: cups
+    state: present

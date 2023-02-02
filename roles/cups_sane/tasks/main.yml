@@ -9,3 +9,23 @@
   apt:
     name: cups
     state: present
+
+- name: Create pdf directory
+  file:
+    path: /home/pi/da_stampare
+    state: directory
+
+- name: Create pdf directory
+  file:
+    path: /home/pi/scripts
+    state: directory
+
+- name: Copy the docker-compose.yml file
+  copy:
+    src: templates/printer.sh
+    dest: /home/pi/scripts/printer.sh
+
+- name: Set script file as executable
+  file:
+    path: /home/pi/scripts/printer.sh
+    mode: 0755

@@ -1,0 +1,12 @@
+---
+version: "3.7"
+services:
+  motioneye:
+    container_name: motioneye
+    image: ccrisan/motioneye:master-armhf
+    volumes:
+    - "/etc/localtime:/etc/localtime:ro"
+    - "/home/pi/motioneye:/etc/motioneye"
+    - "/home/pi/motioneye/storage:/var/lib/motioneye"
+    network_mode: host
+    restart: always

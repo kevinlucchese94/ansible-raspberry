@@ -1,0 +1,24 @@
+- name: Create motioneye directory
+  file:
+    path: /home/pi/motioneye
+    state: directory
+
+- name: Create VPN directory
+  file:
+    path: /home/pi/VPN
+    state: directory
+  
+- name: Create foto_e_video directory
+  file:
+    path: /home/pi/foto_e_video
+    state: directory
+
+- name: Create telecamere directory
+  file:
+    path: /home/pi/telecamere
+    state: directory
+
+- name: Create home assistant directory
+  file:
+    path: /home/pi/home_assistant
+    state: directory

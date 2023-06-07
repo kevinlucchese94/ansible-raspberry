@@ -2,13 +2,13 @@
   apt:
     name: docker-compose
     state: present
-    
+
 - name: Copy docker-compose.yml file
   copy:
     src: templates/docker-compose.yml
-    dest: /home/pi/motioneye/docker-compose.yml
+    dest: /home/pi/home_assistant/docker-compose.yml
 
-- name: Start MotionEye container
+- name: Start Home Assistant container
   command: docker-compose up -d
   args:
-    chdir: /home/pi/motioneye/
+    chdir: /home/pi/home_assistant

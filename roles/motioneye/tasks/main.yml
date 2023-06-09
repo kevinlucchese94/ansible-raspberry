@@ -7,8 +7,3 @@
   copy:
     src: templates/docker-compose.yml
     dest: /home/pi/motioneye/docker-compose.yml
-
-- name: Start MotionEye container
-  command: docker-compose up -d
-  args:
-    chdir: /home/pi/motioneye/

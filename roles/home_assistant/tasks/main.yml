@@ -8,7 +8,3 @@
     src: templates/docker-compose.yml
     dest: /home/pi/home_assistant/docker-compose.yml
 
-- name: Start Home Assistant container
-  command: docker-compose up -d
-  args:
-    chdir: /home/pi/home_assistant

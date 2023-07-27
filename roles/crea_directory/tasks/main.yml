@@ -22,3 +22,8 @@
   file:
     path: /home/pi/home_assistant
     state: directory
+
+- name: Create kuma directory
+  file:
+    path: /home/pi/kuma
+    state: directory

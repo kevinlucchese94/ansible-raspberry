@@ -1,0 +1,5 @@
+- name: Copy docker-compose.yml file
+  copy:
+    src: templates/docker-compose.yml
+    dest: /home/pi/kuma/docker-compose.yml
+

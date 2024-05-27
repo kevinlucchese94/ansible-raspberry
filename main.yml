@@ -3,8 +3,8 @@
     - localhost
   become: true
   roles:
-    - motioneye
     - crea_directory
+    - motioneye
     - cockpit
     - home_assistant
     - kuma
